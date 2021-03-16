@@ -47,7 +47,7 @@ const rings = [
             end: "#48BFFD",
             bg: "#D7F1FF",
             theta: 0.4
-        }], summary: { walk: 24, run: 27, play: 2 }
+        }], summary: { walk: 24, run: 6, play: 2 }
         , required: { total: 40, walk: 0.7, play: 0.1, run: 0.2 }
     }];
 
