@@ -29,7 +29,8 @@ const rings = [
             end: "#48BFFD",
             bg: "#D7F1FF",
             theta: 0.73
-        }], summary: { walk: 19, play: 7, run: 8 }
+        }], summary: { walk: 12, play: 5, run: 8 }
+        , required: { total: 70, walk: 0.4, play: 0.1, run: 0.5 }
     }, {
         data: [{
             start: "#FFF5ED",
@@ -46,7 +47,8 @@ const rings = [
             end: "#48BFFD",
             bg: "#D7F1FF",
             theta: 0.4
-        }], summary: { walk: 24, run: 27, play: 5 }
+        }], summary: { walk: 24, run: 27, play: 2 }
+        , required: { total: 40, walk: 0.7, play: 0.1, run: 0.2 }
     }];
 
 // props for the Activity Ring package
@@ -86,21 +88,21 @@ const Home = () => {
         <>
             <PageWrapper>
                 <StyledScrollView>
-                    {rings && rings.map(({ data, summary }, i) =>
+                    {rings && rings.map(({ data, summary, required }, i) =>
                         <WidgitWrapper key={i} onPress={() => RNSheet.current?.open()}>
                             <Col style={[SharedStyles.W50, SharedStyles.start]}>
                                 <CircleImage source={huskey} width={70} style={SharedStyles.MB16} />
                                 <Row>
                                     <Circle color={`#FF821C`} />
-                                    <Text color={`#FF821C`}>{`Run ${summary.run}/30MIN`}</Text>
+                                    <Text color={`#FF821C`}>{`Run ${summary.run}/${required.total * required.run}MIN`}</Text>
                                 </Row>
                                 <Row style={SharedStyles.MT8}>
                                     <Circle color={`#00BFBF`} />
-                                    <Text color={`#00BFBF`}>{`Walk ${summary.walk}/30MIN`}</Text>
+                                    <Text color={`#00BFBF`}>{`Walk ${summary.walk}/${required.total*required.walk}MIN`}</Text>
                                 </Row>
                                 <Row style={SharedStyles.MT8}>
                                     <Circle color={`#48BFFD`} />
-                                    <Text color={'#48BFFD'}>{`Play ${summary.play}/10MIN`}</Text>
+                                    <Text color={'#48BFFD'}>{`Play ${summary.play}/${required.total*required.play}MIN`}</Text>
                                 </Row>
                             </Col>
                             <CustomActiviyRings ringsValues={data} size={width * 0.36} strokeWidth={20} speed={2000} flex={1} />
@@ -109,7 +111,7 @@ const Home = () => {
 
                     <WidgitWrapper>
                         <Col style={[SharedStyles.W50, SharedStyles.start]}>
-                                <CircleImage source={huskey} width={70} style={SharedStyles.MB16} />
+                            <CircleImage source={huskey} width={70} style={SharedStyles.MB16} />
                             <Row>
                                 <Circle color={`#FF821C`} />
                                 <Text color={`#FF821C`}>{'Run 23/30MIN'}</Text>
@@ -145,7 +147,7 @@ const Home = () => {
                     },
                 }}
             >
-                <ActivityWidgit handleClose={handleCloseSheet}/>
+                <ActivityWidgit handleClose={handleCloseSheet} />
             </RBSheet>
         </>
     );
